@@ -1,8 +1,8 @@
 # EOTUI
-##Feature Rich Mudlet UI for End of Time mud (eotmud.com port 4000)
+## Feature Rich Mudlet UI for End of Time mud (eotmud.com port 4000)
 
 
-####Current Features:
+#### Current Features:
 	- All windows are resizable and moveable outside of the main output window
       - restriction of Mudlet working on a possible work around
 	- Mapper (Modified Mudlet IRE Mapper)
@@ -22,5 +22,5 @@
 	- Settings Window to set General, Layout, Font, Colors, and Stats
 	
 
-######This will be modified as more things are added/planned.
+###### This will be modified as more things are added/planned.
 
