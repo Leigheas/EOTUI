@@ -1,3 +1,9 @@
+### 4/29/2020 NOTE: This ui currently requires atleast version 4.8 of Mudlet.
+Untill its release you can obtain a testing version that it works with at the following links:
+- Windows: https://make.mudlet.org/snapshots/a6ec76/Mudlet-4.6.2-testing-42b84096-windows.zip
+- Macos: https://make.mudlet.org/snapshots/19fd56/Mudlet-4.6.2-testing-42b8409.dmg
+- Linux: https://make.mudlet.org/snapshots/fedf49/Mudlet-4.6.2-testing-42b8409-linux-x64.AppImage.tar
+
 # EOTUI
 ## Feature Rich Mudlet UI for End of Time mud (eotmud.com port 4000)
 
