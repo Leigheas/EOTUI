@@ -15,6 +15,6 @@
 	-Field Info and Mapper can be combined into one tabbed window
 	-Settings Window to set General, Layout, Font, Colors, and Stats
 	
-	
+
 ######This will be modified as more things are added/planned.
 
