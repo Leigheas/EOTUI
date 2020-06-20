@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MudletPackage>
 <MudletPackage version="1.001">
+	<TriggerPackage />
+	<TimerPackage />
 	<AliasPackage>
 		<AliasGroup isActive="yes" isFolder="yes">
 			<name>EOTUI</name>
@@ -1611,4 +1613,10 @@ info("New version: "..eotui.version.."\n")</script>
 			</Alias>
 		</AliasGroup>
 	</AliasPackage>
+	<ActionPackage />
+	<ScriptPackage />
+	<KeyPackage />
+	<HelpPackage>
+		<helpURL></helpURL>
+	</HelpPackage>
 </MudletPackage>
