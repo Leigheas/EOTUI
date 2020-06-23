@@ -203,6 +203,63 @@ end
 				<eventHandlerList />
 			</Script>
 			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Group Tracker</name>
+				<packageName></packageName>
+				<script>--Group Tracker
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>Setup Group Tracker (eotui.setupGroupTracker)</name>
+					<packageName></packageName>
+					<script>function eotui.setupGroupTracker()
+  eotui.groupTracker = eotui.groupTracker or Geyser.MiniConsole:new({
+		  name = "eotui.groupTracker",}, eotui.groupContainer) -- 
+	eotui.groupTracker:move(0, 0)
+	eotui.groupTracker:resize("-0", "100%")
+	setMiniConsoleFontSize("eotui.groupTracker", 10);
+  eotui.groupTracker:setColor(eotui.settings.winbackcolor)
+end
+
+registerAnonymousEventHandler("containers_created", "eotui.setupGroupTracker")</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Group Info Pull (eotui.pullGroupInfo)</name>
+					<packageName></packageName>
+					<script>--Idea:
+--modify to display other options if you are a healer
+--one click heal casting ect...
+
+
+function eotui.pullGroupInfo()
+	local tg = TextGauge:new()
+	local max_group_size 	= #msdp.GROUP
+	local group_size 			= 1
+	
+	clearWindow("eotui.groupTracker")
+	
+	if #msdp.GROUP &gt;= 1 then
+		while (group_size &lt;= max_group_size) do
+			if msdp.GROUP[group_size].NAME ~= nil then
+				if msdp.GROUP[group_size].CUR_HP ~= msdp.GROUP[group_size].MAX_HP then 
+					local bar_change = ((tonumber(msdp.GROUP[group_size].CUR_HP) / tonumber(msdp.GROUP[group_size].MAX_HP)) * 100)
+					cecho ("eotui.groupTracker", ""..tostring(msdp.GROUP[group_size].NAME) .. "  Hp: "..tonumber(msdp.GROUP[group_size].CUR_HP).." / "..tonumber(msdp.GROUP[group_size].MAX_HP).."\n")
+					cecho("eotui.groupTracker", tg:setValue(bar_change) .. "\n")
+				else
+					cecho ("eotui.groupTracker", ""..tostring(msdp.GROUP[group_size].NAME) .. "  Hp: "..tonumber(msdp.GROUP[group_size].CUR_HP).." / "..tonumber(msdp.GROUP[group_size].MAX_HP).."\n")
+					cecho("eotui.groupTracker", tg:setValue(100) .. "\n")
+				end
+				group_size = group_size+1    
+    	end
+  	end
+	end
+end
+
+registerAnonymousEventHandler("msdp.GROUP", "eotui.pullGroupInfo")</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
 				<name>Utilities</name>
 				<packageName></packageName>
 				<script></script>
@@ -3662,12 +3719,16 @@ function eotui.affUp()
 	if #msdp.AFFECTS ~= nil then
 		for k, v in pairs(msdp.AFFECTS) do
 			local durtonum = tonumber(v)
-			local sectomin = math.floor(durtonum / 60)
+      local sectomin = math.floor(durtonum / 60)
 			local mintosec = durtonum % 60
 			local countcolor = ""
 			if durtonum&lt;10 then countcolor = ""..lcc.."" else countcolor = ""..hcc.."" end
-			eotui.affInfoBuff:cecho("&lt;"..dec.."&gt;"..k.. "&lt;"..div.."&gt; for &lt;"..hcc.."&gt;" ..sectomin.. "&lt;"..div.."&gt;m&lt;"..countcolor.."&gt; "..mintosec.."&lt;"..div.."&gt;s \n")
-		end -- for
+      if tonumber(v) == "-1"  then
+        eotui.affInfoBuff:cecho("&lt;"..dec.."&gt;"..k.. "&lt;"..div.."&gt; for &lt;"..hcc.."&gt; PERM &lt;"..div.."&gt;s \n")
+      else
+        eotui.affInfoBuff:cecho("&lt;"..dec.."&gt;"..k.. "&lt;"..div.."&gt; for &lt;"..hcc.."&gt;" ..sectomin.. "&lt;"..div.."&gt;m&lt;"..countcolor.."&gt; "..mintosec.."&lt;"..div.."&gt;s \n")
+      end
+    end -- for
 	end
 end -- function
 
@@ -8727,9 +8788,9 @@ end</script>
     mmp.envids[name] = number+256 -- adjust for in-built colors
   end
 
-  mmp.waterenvs = {}
-  local waterids = { "Underwater"}
-  for i = 1, #waterids do mmp.waterenvs[mmp.envids[waterids[i]]] = true end
+  --mmp.waterenvs = {}
+  --local waterids = { "Underwater"}
+  --for i = 1, #waterids do mmp.waterenvs[mmp.envids[waterids[i]]] = true end
 
   mmp.envidsr = {};
   for name, id in pairs(mmp.envids) do mmp.envidsr[id] = name end</script>
@@ -10529,63 +10590,6 @@ end
 function mmp.getMapFeatures()
   return loadMapFeatures()
 end</script>
-					<eventHandlerList />
-				</Script>
-			</ScriptGroup>
-			<ScriptGroup isActive="yes" isFolder="yes">
-				<name>Group Tracker</name>
-				<packageName></packageName>
-				<script>--Group Tracker
-</script>
-				<eventHandlerList />
-				<Script isActive="yes" isFolder="no">
-					<name>Setup Group Tracker (eotui.setupGroupTracker)</name>
-					<packageName></packageName>
-					<script>function eotui.setupGroupTracker()
-  eotui.groupTracker = eotui.groupTracker or Geyser.MiniConsole:new({
-		  name = "eotui.groupTracker",}, eotui.groupContainer) -- 
-	eotui.groupTracker:move(0, 0)
-	eotui.groupTracker:resize("-0", "100%")
-	setMiniConsoleFontSize("eotui.groupTracker", 10);
-  eotui.groupTracker:setColor(eotui.settings.winbackcolor)
-end
-
-registerAnonymousEventHandler("containers_created", "eotui.setupGroupTracker")</script>
-					<eventHandlerList />
-				</Script>
-				<Script isActive="yes" isFolder="no">
-					<name>Group Info Pull (eotui.pullGroupInfo)</name>
-					<packageName></packageName>
-					<script>--Idea:
---modify to display other options if you are a healer
---one click heal casting ect...
-
-
-function eotui.pullGroupInfo()
-	local tg = TextGauge:new()
-	local max_group_size 	= #msdp.GROUP
-	local group_size 			= 1
-	
-	clearWindow("eotui.groupTracker")
-	
-	if #msdp.GROUP &gt;= 1 then
-		while (group_size &lt;= max_group_size) do
-			if msdp.GROUP[group_size].NAME ~= nil then
-				if msdp.GROUP[group_size].CUR_HP ~= msdp.GROUP[group_size].MAX_HP then 
-					local bar_change = ((tonumber(msdp.GROUP[group_size].CUR_HP) / tonumber(msdp.GROUP[group_size].MAX_HP)) * 100)
-					cecho ("eotui.groupTracker", ""..tostring(msdp.GROUP[group_size].NAME) .. "  Hp: "..tonumber(msdp.GROUP[group_size].CUR_HP).." / "..tonumber(msdp.GROUP[group_size].MAX_HP).."\n")
-					cecho("eotui.groupTracker", tg:setValue(bar_change) .. "\n")
-				else
-					cecho ("eotui.groupTracker", ""..tostring(msdp.GROUP[group_size].NAME) .. "  Hp: "..tonumber(msdp.GROUP[group_size].CUR_HP).." / "..tonumber(msdp.GROUP[group_size].MAX_HP).."\n")
-					cecho("eotui.groupTracker", tg:setValue(100) .. "\n")
-				end
-				group_size = group_size+1    
-    	end
-  	end
-	end
-end
-
-registerAnonymousEventHandler("msdp.GROUP", "eotui.pullGroupInfo")</script>
 					<eventHandlerList />
 				</Script>
 			</ScriptGroup>

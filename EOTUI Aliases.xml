@@ -20,7 +20,9 @@ if arg1 == "" then
   info("** redraw   - redraws ui containers               **")
   info("** settings - shows/hides settings                **")
   info("** version  - displays current EOTUI Version      **")
+  --info("** imm      - enables immortal/wizard mode        **")
   info("****************************************************")
+  
 end
 if arg1 == "allsave" then
   info("Saving all container locations")
@@ -251,7 +253,7 @@ mmp.settings:setOption(matches[3], val)</script>
 					<packageName></packageName>
 					<regex>^area list$</regex>
 				</Alias>
-				<AliasGroup isActive="no" isFolder="yes">
+				<AliasGroup isActive="yes" isFolder="yes">
 					<name>mm Mapping</name>
 					<script></script>
 					<command></command>
