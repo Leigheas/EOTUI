@@ -3550,6 +3550,9 @@ function eotui.displayCooldowns()
       local sectomin = math.floor(durtonum / 60)
 			local mintosec = durtonum % 60
 			local countcolor = ""
+      if tostring(k) == "critical insight" then 
+        k = tostring("crit insight")
+      end
 			if durtonum&lt;10 then countcolor = ""..lcc.."" else countcolor = ""..hcc.."" end
       if tonumber(v) == "-1"  then
         eotui.cooldownDisplay:cecho("&lt;"..dec.."&gt;"..k.. "&lt;"..div.."&gt; for &lt;"..hcc.."&gt; PERM &lt;"..div.."&gt;s \n")
