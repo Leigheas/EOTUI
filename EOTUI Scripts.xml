@@ -193,6 +193,11 @@ function eotui.setupContainers()
   eotui.groupContainer:setTitle("Group Tracker")
   eotui.groupContainer:hide()
   
+  --Cooldowns
+  eotui.cooldownContainer = eotui.cooldownContainer or Adjustable.Container:new({
+    name = "eotui.cooldownContainer"})
+  eotui.cooldownContainer:setTitle("Cooldowns")
+  
   raiseEvent("containers_created") --send out we are done making the containers
   --used to trigger the other stuff to finish creating everything and start populating
   --them
@@ -2762,6 +2767,35 @@ end
 </script>
 				<eventHandlerList />
 				<Script isActive="yes" isFolder="no">
+					<name>Cooldowns (eotui.cooldownSetup)</name>
+					<packageName></packageName>
+					<script>function eotui.cooldownSetup()
+  eotui.cooldownDisplay =
+    eotui.cooldownDisplay or
+    Geyser.MiniConsole:new(
+      {name = "eotui.cooldownDisplay", scrollbar = true, fontsize = 10}, eotui.cooldownContainer
+    )
+  eotui.cooldownDisplay:move(0, 0)
+  --uncomment below and relace to put in other window.
+  --eotui.affInfoBuff:resize("50%", "100%")
+  eotui.cooldownDisplay:resize("100%", "100%")
+  eotui.cooldownDisplay:setColor(eotui.settings.winbackcolor)
+  
+  --uncomment below to add in debuff window.
+  --eotui.affInfoDebuff =
+  --  eotui.affInfoDebuff or
+  --  Geyser.MiniConsole:new(
+  --    {name = "eotui.affInfoDebuff", scrollbar = true, fontsize = 10},
+  --    eotui.affInfoContainer
+  --  )
+  --eotui.affInfoDebuff:move("50%", 0)
+  --eotui.affInfoDebuff:resize("50%", "100%")
+end
+
+registerAnonymousEventHandler("containers_created", "eotui.cooldownSetup")</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
 					<name>Field Info (eotui.fieldSetup)</name>
 					<packageName></packageName>
 					<script>function eotui.fieldSetup()
@@ -3497,6 +3531,38 @@ registerAnonymousEventHandler("msdp.REPLY", "eotui.chatReplies")</script>
 						<eventHandlerList />
 					</Script>
 				</ScriptGroup>
+				<Script isActive="yes" isFolder="no">
+					<name>Cooldowns (eotui.displayCooldowns)</name>
+					<packageName></packageName>
+					<script>-- Update and output the things affecting us to the window, with timers!
+function eotui.displayCooldowns()
+	clearWindow("eotui.cooldownDisplay")
+	local lcc = eotui.settings.colors.lowcount
+	local hcc = eotui.settings.colors.highcount
+	local dec = eotui.settings.colors.defense
+	local aff = eotui.settings.colors.affliction
+	local div = eotui.settings.colors.divider
+	-- so with how the affects are sent in EOT thru msdp
+	-- k = the affect name and v is the duration (msdp.AFFECTS.k)
+	if #msdp.ALL_CDS ~= nil then
+		for k, v in pairs(msdp.ALL_CDS) do
+			local durtonum = tonumber(v)
+      local sectomin = math.floor(durtonum / 60)
+			local mintosec = durtonum % 60
+			local countcolor = ""
+			if durtonum&lt;10 then countcolor = ""..lcc.."" else countcolor = ""..hcc.."" end
+      if tonumber(v) == "-1"  then
+        eotui.cooldownDisplay:cecho("&lt;"..dec.."&gt;"..k.. "&lt;"..div.."&gt; for &lt;"..hcc.."&gt; PERM &lt;"..div.."&gt;s \n")
+      else
+        eotui.cooldownDisplay:cecho("&lt;"..dec.."&gt;"..k.. "&lt;"..div.."&gt; for &lt;"..hcc.."&gt;" ..sectomin.. "&lt;"..div.."&gt;m&lt;"..countcolor.."&gt; "..mintosec.."&lt;"..div.."&gt;s \n")
+      end
+    end -- for
+	end
+end -- function
+
+registerAnonymousEventHandler("msdp.ALL_CDS", "eotui.displayCooldowns")</script>
+					<eventHandlerList />
+				</Script>
 				<Script isActive="yes" isFolder="no">
 					<name>Field (eotui.updateFieldInfo)</name>
 					<packageName></packageName>

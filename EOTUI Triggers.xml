@@ -3530,8 +3530,24 @@ mmp.echo("We're connected to Lithmeria.")</script>
 						<colorTriggerBgColor>#000000</colorTriggerBgColor>
 						<regexCodeList>
 							<string>^The door to the (\w+) is closed.$</string>
+							<string>^The doorway to the (\w+) is closed.$</string>
+							<string>^The counter to the (\w+) is closed.$</string>
+							<string>^The curtain to the (\w+) is closed.$</string>
+							<string>^The gate to the (\w+) is closed.$</string>
+							<string>^The thick steel door to the (\w+) is closed.$</string>
+							<string>^The heavy steel door to the (\w+) is closed.$</string>
+							<string>^The solid steel hatch to the (\w+) is closed.$</string>
+							<string>^The portal to the (\w+) is closed.$</string>
 						</regexCodeList>
 						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
 							<integer>1</integer>
 						</regexCodePropertyList>
 					</Trigger>
@@ -3687,7 +3703,7 @@ sendMSDP("REPORT", "SAVES", "MIT_PARRY", "MIT_BLOCK", "BANK")
 sendMSDP("REPORT", "ITEM_WEIGHT_CUR", "ITEM_WEIGHT_MAX", "ITEM_HELD_CUR", "ITEM_HELD_MAX")
 sendMSDP("REPORT", "ELEM1", "ELEM2", "SECTOR", "COORDS_X", "COORDS_Y", "COORDS_MAP")
 sendMSDP("REPORT", "WAIT", "DAZE", "MORPH")
-sendMSDP("REPORT", "SKILL_CDS", "TECH_CDS")
+sendMSDP("REPORT", "SKILL_CDS", "TECH_CDS", "ALL_CDS")
 
 -- 	Field data
 --	they are reverse what they appear on the screen so order is actually:
@@ -3750,7 +3766,7 @@ sendMSDP("REPORT", "SAVES", "MIT_PARRY", "MIT_BLOCK", "BANK")
 sendMSDP("REPORT", "ITEM_WEIGHT_CUR", "ITEM_WEIGHT_MAX", "ITEM_HELD_CUR", "ITEM_HELD_MAX")
 sendMSDP("REPORT", "ELEM1", "ELEM2", "SECTOR", "COORDS_X", "COORDS_Y", "COORDS_MAP")
 sendMSDP("REPORT", "WAIT", "DAZE", "MORPH")
-sendMSDP("REPORT", "SKILL_CDS", "TECH_CDS")
+sendMSDP("REPORT", "SKILL_CDS", "TECH_CDS", "ALL_CDS")
 
 -- 	Field data
 --	they are reverse what they appear on the screen so order is actually:
