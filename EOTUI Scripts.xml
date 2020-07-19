@@ -15,7 +15,7 @@
 				<name>Variables</name>
 				<packageName></packageName>
 				<script>eotui = eotui or {}
-eotui.version = eotui.version or .7
+eotui.version = eotui.version or .8
 eotui.container = eotui.container or {}
 --combine stats and inventory to one tabbed window
 --combine field color info and mapper
