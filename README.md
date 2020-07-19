@@ -1,4 +1,4 @@
-### 4/29/2020 NOTE: This ui requires atleast version 4.8 of Mudlet.
+### NOTE: This ui requires atleast version 4.8 of Mudlet.
 
 # EOTUI
 ## Feature Rich Mudlet UI for End of Time mud (eotmud.com port 4000)
