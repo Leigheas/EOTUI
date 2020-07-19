@@ -1,8 +1,4 @@
-### 4/29/2020 NOTE: This ui currently requires atleast version 4.8 of Mudlet.
-Untill its release you can obtain a testing version that it works with at the following links:
-- Windows: https://make.mudlet.org/snapshots/a6ec76/Mudlet-4.6.2-testing-42b84096-windows.zip
-- Macos: https://make.mudlet.org/snapshots/19fd56/Mudlet-4.6.2-testing-42b8409.dmg
-- Linux: https://make.mudlet.org/snapshots/fedf49/Mudlet-4.6.2-testing-42b8409-linux-x64.AppImage.tar
+### NOTE: This ui requires atleast version 4.8 of Mudlet.
 
 # EOTUI
 ## Feature Rich Mudlet UI for End of Time mud (eotmud.com port 4000)
@@ -16,6 +12,7 @@ Untill its release you can obtain a testing version that it works with at the fo
 	  - (modifications to functionality planned in the future)	
 	- Affects Window 
 	  - (ability to designate an affect as a debuff is planned)
+	- Cooldown Tracker
 	- Chat Window 
 	  - (some features still being made)
 	- Field Info Display
@@ -26,7 +23,7 @@ Untill its release you can obtain a testing version that it works with at the fo
 	- Stats and Inventory Windows can be combined into one tabbed window
 	- Field Info and Mapper can be combined into one tabbed window
 	- Settings Window to set General, Layout, Font, Colors, and Stats
-	
+	  - WORK IN PROGRESS, not alot in settings window yet.
 
 ###### This will be modified as more things are added/planned.
 
