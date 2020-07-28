@@ -3618,9 +3618,13 @@ registerAnonymousEventHandler("msdp.LOCKED", "eotui.updateFieldInfo")</script>
 		eotui.invContainer:cecho(demonnic:cfText("&lt;"..hdr.."&gt; Inventory", {alignment="center", width =28, inside=false}))
 		for index,item in ipairs(msdp.INVENTORY) do
 			if tostring(item.LOCATION) == "Inventory" then
+        if tostring(item.NAME) == "a hi-potion" then
+          carried_hipots = tonumber(item.COUNT)
+        end
 				if tonumber(item.COUNT) &gt;= 2 then
-					cecho ("eotui.invContainer", "\n("..item.COUNT..") "..item.NAME .. "")
+          cecho ("eotui.invContainer", "\n("..item.COUNT..") "..item.NAME .. "")
 				else
+          --cechoPopup("eotui.invContainer","\n"..item.NAME.."", {[[send "sleep"]], [[send "sit"]], [[send "stand"]]}, {"sleep", "sit", "stand"}, true)
 					cecho ("eotui.invContainer", "\n"..item.NAME.."")
 				end
 			end
@@ -3628,11 +3632,15 @@ registerAnonymousEventHandler("msdp.LOCKED", "eotui.updateFieldInfo")</script>
 	else
 		eotui.statsInvContainer.windows.Inventory:clear()
 		for index,item in ipairs(msdp.INVENTORY) do
-			if tostring(item.LOCATION) == "Inventory" then
+      if tostring(item.NAME) == "a hi-potion" then
+        carried_hipots = tonumber(item.COUNT)
+      end
+      if tostring(item.LOCATION) == "Inventory" then
 				if tonumber(item.COUNT) &gt;= 2 then
 					eotui.statsInvContainer:cecho ("Inventory", "\n("..item.COUNT..") "..item.NAME .. "")
 				else
-					eotui.statsInvContainer:cecho ("Inventory", "\n"..item.NAME.."")
+          eotui.statsInvContainer:cechoPopup("Inventory","\n"..item.NAME.."", {[[send "sleep"]], [[send "sit"]], [[send "stand"]]}, {"sleep", "sit", "stand"}, true)
+					--eotui.statsInvContainer:cecho ("Inventory", "\n"..item.NAME.."")
 				end
 			end
 		end
