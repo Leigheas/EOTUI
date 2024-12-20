@@ -3530,6 +3530,17 @@ end
 registerAnonymousEventHandler("msdp.REPLY", "eotui.chatReplies")</script>
 						<eventHandlerList />
 					</Script>
+					<Script isActive="yes" isFolder="no">
+						<name>IMM (eotui.chatIMM)</name>
+						<packageName></packageName>
+						<script>function eotui.chatIMM()
+  local replace = ansi2decho(msdp.IMM)
+  eotui.chatContainer:decho("OOC", replace)
+end
+
+registerAnonymousEventHandler("msdp.IMM", "eotui.chatIMM")</script>
+						<eventHandlerList />
+					</Script>
 				</ScriptGroup>
 				<Script isActive="yes" isFolder="no">
 					<name>Cooldowns (eotui.displayCooldowns)</name>
@@ -3674,12 +3685,15 @@ registerAnonymousEventHandler("msdp.INVENTORY", "eotui.invUpdate")</script>
 			cecho("eotui.stats", demonnic:cfText("&lt;"..hdr.."&gt;"..msdp.CHARACTER_NAME.."", {alignment="center", width =50, inside=false}))
 			cechoLink("eotui.stats", "&lt;"..emp.."&gt;Race&lt;"..div.."&gt;: "..tostring(msdp.RACE).."    ", [[send("help human")]], ""..tostring(msdp.RACE).." Race", true)
 			cechoLink("eotui.stats", "&lt;"..emp.."&gt;Class&lt;"..div.."&gt;: "..tostring(msdp.CLASS).."", [[send("help "..msdp.CLASS.."s")]], ""..tostring(msdp.CLASS).." Class", true)
-			cecho("eotui.stats", "\n")
 			cecho("eotui.stats", "&lt;"..emp.."&gt;Level&lt;"..div.."&gt;: "..msdp.LEVEL.. "&lt;"..emp.."&gt;     TNL&lt;"..div.."&gt;: "..msdp.EXPERIENCE_TNL.."\n")
 			cecho("eotui.stats", "&lt;"..emp.."&gt;GIL&lt;"..div.."&gt;: "..msdp.GIL.. "&lt;"..emp.."&gt;       Bank&lt;"..div.."&gt;: "..msdp.BANK.. "&lt;"..emp.."&gt;      AP&lt;"..div.."&gt;: "..msdp.AP.."("..trains_avail..")\n")
 			cechoLink("eotui.stats", "&lt;"..emp.."&gt;Items&lt;"..div.."&gt;: "..tonumber(msdp.ITEM_HELD_CUR).."/"..tonumber(msdp.ITEM_HELD_MAX).."   ", [[send("")]], "Current/Max Items you can hold.\nAffected by AGI", true)
 			cechoLink("eotui.stats", "&lt;"..emp.."&gt;Weight&lt;"..div.."&gt;: "..tonumber(msdp.ITEM_WEIGHT_CUR).."/"..tonumber(msdp.ITEM_WEIGHT_MAX).."   ", [[send("")]], "Current/Max Weight you can hold.\nAffected by PWR", true)
-			cecho("eotui.stats", "\n")
+			if tostring(msdp.RACE) == "Moogle" then
+         cecho("eotui.stats", "&lt;"..emp.."&gt;\nSector&lt;"..div.."&gt;: "..msdp.SECTOR.."\n")
+      else
+         cecho("eotui.stats", "\n")
+      end
 			cecho("eotui.stats", "\n")
 			cechoLink("eotui.stats", "&lt;"..emp.."&gt;Pwr&lt;"..div.."&gt;: "..tonumber(msdp.PWR).."    ", [[send("help pwr")]], "Atk Power and weight you can carry", true)
 			cechoLink("eotui.stats", "&lt;"..emp.."&gt;Vit&lt;"..div.."&gt;: "..tonumber(msdp.VIT).."    ", [[send("help vit")]], "HP per level and defense", true)
@@ -3711,13 +3725,17 @@ registerAnonymousEventHandler("msdp.INVENTORY", "eotui.invUpdate")</script>
 			eotui.statsInvContainer:cecho("Stats", demonnic:cfText("&lt;"..hdr.."&gt;"..msdp.CHARACTER_NAME.."", {alignment="center", width =50, inside=false}))
 			eotui.statsInvContainer:cechoLink("Stats", "\n&lt;"..emp.."&gt;Race&lt;"..div.."&gt;: "..tostring(msdp.RACE).."    ", [[send("help human")]], ""..tostring(msdp.RACE).." Race", true)
 			eotui.statsInvContainer:cechoLink("Stats", "&lt;"..emp.."&gt;Class&lt;"..div.."&gt;: "..tostring(msdp.CLASS).."", [[send("help "..msdp.CLASS.."s")]], ""..tostring(msdp.CLASS).." Class", true)
-			eotui.statsInvContainer:cecho("Stats", "\n")
+      eotui.statsInvContainer:cecho("Stats", "\n")
 			eotui.statsInvContainer:cecho("Stats", "&lt;"..emp.."&gt;Level&lt;"..div.."&gt;: "..msdp.LEVEL.. "&lt;"..emp.."&gt;     TNL&lt;"..div.."&gt;: "..msdp.EXPERIENCE_TNL.."\n")
 			eotui.statsInvContainer:cecho("Stats", "&lt;"..emp.."&gt;GIL&lt;"..div.."&gt;: "..msdp.GIL.. "&lt;"..emp.."&gt;       Bank&lt;"..div.."&gt;: "..msdp.BANK.. "&lt;"..emp.."&gt;      AP&lt;"..div.."&gt;: "..msdp.AP.."("..trains_avail..")\n")
 			eotui.statsInvContainer:cechoLink("Stats", "&lt;"..emp.."&gt;Items&lt;"..div.."&gt;: "..tonumber(msdp.ITEM_HELD_CUR).."/"..tonumber(msdp.ITEM_HELD_MAX).."   ", [[send("")]], "Current/Max Items you can hold.\nAffected by AGI", true)
 			eotui.statsInvContainer:cechoLink("Stats", "&lt;"..emp.."&gt;Weight&lt;"..div.."&gt;: "..tonumber(msdp.ITEM_WEIGHT_CUR).."/"..tonumber(msdp.ITEM_WEIGHT_MAX).."   ", [[send("")]], "Current/Max Weight you can hold.\nAffected by PWR", true)
-			eotui.statsInvContainer:cecho("Stats", "\n")
-			eotui.statsInvContainer:cecho("Stats", "\n")
+			if tostring(msdp.RACE) == "Moogle" then
+         eotui.statsInvContainer:cecho("Stats", "&lt;"..emp.."&gt;\nSector&lt;"..div.."&gt;: "..msdp.SECTOR.."\n")
+      else
+         eotui.statsInvContainer:cecho("Stats", "\n")
+      end
+      eotui.statsInvContainer:cecho("Stats", "\n")
 			eotui.statsInvContainer:cechoLink("Stats", "&lt;"..emp.."&gt;Pwr&lt;"..div.."&gt;: "..tonumber(msdp.PWR).."    ", [[send("help pwr")]], "Atk Power and weight you can carry", true)
 			eotui.statsInvContainer:cechoLink("Stats", "&lt;"..emp.."&gt;Vit&lt;"..div.."&gt;: "..tonumber(msdp.VIT).."    ", [[send("help vit")]], "HP per level and defense", true)
 			eotui.statsInvContainer:cechoLink("Stats", "&lt;"..emp.."&gt;Wil&lt;"..div.."&gt;: "..tonumber(msdp.WIL).."    ", [[send("help wil")]], "Magic Damage, skill learning, accuracy\nand some misc.", true)
